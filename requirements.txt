@@ -1,4 +1,5 @@
-MegEngine>=1.9.1
+--find-links https://megengine.org.cn/whl/mge.html
+MegEngine==1.12.1
 opencv-python>=3.4.0
 numpy>=1.18.1
 Pillow>=8.4.0
