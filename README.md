@@ -10,7 +10,7 @@ This repository contains [MegEngine](https://github.com/MegEngine/MegEngine) imp
 
 **[Paper](https://openaccess.thecvf.com/content/CVPR2022/papers/Li_Practical_Stereo_Matching_via_Cascaded_Recurrent_Network_With_Adaptive_Correlation_CVPR_2022_paper.pdf)  | [ArXiv](https://arxiv.org/abs/2203.11483) | [BibTeX](#citation)** 
 
-<a href="https://replicate.com/arielreplicate/crestereo"><img src="https://replicate.com/arielreplicate/crestereo/badge"></a>  
+<a href="https://replicate.com/robbertc5/crestereo-raw"><img src="https://replicate.com/robbertc5/crestereo-raw/badge"></a>  
 
 <img src="img/teaser.jpg">
 
@@ -81,12 +81,14 @@ shotwell /tmp/disparity.png
 
  ## Inference
 
-Download the pretrained MegEngine model from [here](https://drive.google.com/file/d/1Wx_-zDQh7BUFBmN9im_26DFpnf3AkXj4/view) and run:
+Download the pretrained MegEngine model from [here](https://drive.google.com/file/d/1Wx_-zDQh7BUFBmN9im_26DFpnf3AkXj4/view) and run (fill in path to the model and output extension):
 
 ```shell
-python3 test.py --model_path path_to_mge_model --left img/test/left.png --right img/test/right.png --size 1024x1536 --output disparity.png
+python3 test.py --model_path path_to_mge_model --left img/test/left.png --right img/test/right.png --size 1024x1536 --output disparity.EXT
 ```
-
+- To get raw results of the model, export to .pfm or .tiff format.
+- To get the results of the model in 16-bit png format, export to .png format. (Note that the disparity is scaled by 32 in the png format.)
+- To get the results of the model normalized to 0-255, export to .jpg format.
 
  ## Training
 
