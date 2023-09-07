@@ -96,12 +96,15 @@ if __name__ == "__main__":
     t = float(in_w) / float(eval_w)
     disp = cv2.resize(pred, (in_w, in_h), interpolation=cv2.INTER_LINEAR) * t
 
-    disp_vis = (disp - disp.min()) / (disp.max() - disp.min()) * 255.0
-    disp_vis = disp_vis.astype("uint8")
-    disp_vis = cv2.applyColorMap(disp_vis, cv2.COLORMAP_INFERNO)
+    # disp_vis = (disp - disp.min()) / (disp.max() - disp.min()) * 255.0
+    # disp_vis = disp_vis.astype("uint8")
+    # disp_vis = cv2.applyColorMap(disp_vis, cv2.COLORMAP_INFERNO)
 
     parent_path = os.path.abspath(os.path.join(args.output, os.pardir))
     if not os.path.exists(parent_path):
         os.makedirs(parent_path)
-    cv2.imwrite(args.output, disp_vis)
+
+    disp[disp < 0] = 0
+    disp = (disp*255).astype("uint16")
+    cv2.imwrite(args.output, disp)
     print("Done! Result path:", os.path.abspath(args.output))
