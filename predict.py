@@ -25,17 +25,14 @@ class Predictor(BasePredictor):
         left_img = cv2.resize(left, (eval_w, eval_h), interpolation=cv2.INTER_LINEAR)
         right_img = cv2.resize(right, (eval_w, eval_h), interpolation=cv2.INTER_LINEAR)
 
-        pred = inference(left_img, right_img, self.model_func, n_iter=20)
-
-        t = float(in_w) / float(eval_w)
-        disp = cv2.resize(pred, (in_w, in_h), interpolation=cv2.INTER_LINEAR) * t
+        disp = inference(left_img, right_img, self.model_func, n_iter=20)
 
         #disp_vis = (disp - disp.min()) / (disp.max() - disp.min()) * 255.0
         #disp_vis = disp_vis.astype("uint8")
         #disp_vis = cv2.applyColorMap(disp_vis, cv2.COLORMAP_INFERNO)
 
-        disp[disp < 0] = 0
-        disp = (disp*255).astype("uint16")
+        print("Saving 16-bit 32*disparity map...")
+        disp = (disp*32.0).astype("uint16")
         cv2.imwrite(output_path, disp)
 
         return Path(output_path)

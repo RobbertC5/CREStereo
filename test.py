@@ -91,10 +91,7 @@ if __name__ == "__main__":
     left_img = cv2.resize(left, (eval_w, eval_h), interpolation=cv2.INTER_LINEAR)
     right_img = cv2.resize(right, (eval_w, eval_h), interpolation=cv2.INTER_LINEAR)
 
-    pred = inference(left_img, right_img, model_func, n_iter=20)
-
-    t = float(in_w) / float(eval_w)
-    disp = cv2.resize(pred, (in_w, in_h), interpolation=cv2.INTER_LINEAR) * t
+    disp = inference(left_img, right_img, model_func, n_iter=20)
 
     parent_path = os.path.abspath(os.path.join(args.output, os.pardir))
     if not os.path.exists(parent_path):
